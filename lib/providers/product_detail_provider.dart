@@ -15,9 +15,13 @@ class ProductDetailProvider extends ChangeNotifier {
   bool _isDisposed = false;
 
   Product? get product => _product;
+
   bool get isLoading => _isLoading;
+
   ApiException? get error => _error;
+
   String? get errorMessage => _error?.message;
+
   bool get isUsingCachedData => _isUsingCachedData;
 
   Future<void> load(int id) async {

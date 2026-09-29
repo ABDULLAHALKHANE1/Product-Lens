@@ -29,23 +29,23 @@ class _ProductLensAppState extends State<ProductLensApp> {
 
   @override
   Widget build(BuildContext context) => MultiProvider(
-        providers: [
-          ChangeNotifierProvider<ThemeProvider>(
-            create: (_) => widget.dependencies.createThemeProvider(),
-          ),
-          ChangeNotifierProvider<ProductProvider>(
-            create: (_) => widget.dependencies.createProductProvider(),
-          ),
-        ],
-        child: Consumer<ThemeProvider>(
-          builder: (context, themeProvider, _) => MaterialApp.router(
-            title: 'Product Lens',
-            debugShowCheckedModeBanner: false,
-            theme: AppTheme.light(),
-            darkTheme: AppTheme.dark(),
-            themeMode: themeProvider.themeMode,
-            routerConfig: widget.dependencies.router,
-          ),
-        ),
-      );
+    providers: [
+      ChangeNotifierProvider<ThemeProvider>(
+        create: (_) => widget.dependencies.createThemeProvider(),
+      ),
+      ChangeNotifierProvider<ProductProvider>(
+        create: (_) => widget.dependencies.createProductProvider(),
+      ),
+    ],
+    child: Consumer<ThemeProvider>(
+      builder: (context, themeProvider, _) => MaterialApp.router(
+        title: 'Product Lens',
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.light(),
+        darkTheme: AppTheme.dark(),
+        themeMode: themeProvider.themeMode,
+        routerConfig: widget.dependencies.router,
+      ),
+    ),
+  );
 }

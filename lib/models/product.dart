@@ -49,8 +49,7 @@ class Product {
       title: json['title'] as String? ?? 'Untitled product',
       description: json['description'] as String? ?? '',
       price: (json['price'] as num?)?.toDouble() ?? 0,
-      discountPercentage:
-          (json['discountPercentage'] as num?)?.toDouble() ?? 0,
+      discountPercentage: (json['discountPercentage'] as num?)?.toDouble() ?? 0,
       rating: (json['rating'] as num?)?.toDouble() ?? 0,
       stock: (json['stock'] as num?)?.toInt() ?? 0,
       brand: (json['brand'] as String?)?.trim().isNotEmpty == true
@@ -71,23 +70,23 @@ class Product {
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'title': title,
-        'description': description,
-        'price': price,
-        'discountPercentage': discountPercentage,
-        'rating': rating,
-        'stock': stock,
-        'brand': brand,
-        'category': category,
-        'thumbnail': thumbnail,
-        'images': images,
-        'reviews': reviews.map((review) => review.toJson()).toList(),
-        'meta': {'qrCode': qrCode},
-        'warrantyInformation': warrantyInformation,
-        'shippingInformation': shippingInformation,
-        'returnPolicy': returnPolicy,
-      };
+    'id': id,
+    'title': title,
+    'description': description,
+    'price': price,
+    'discountPercentage': discountPercentage,
+    'rating': rating,
+    'stock': stock,
+    'brand': brand,
+    'category': category,
+    'thumbnail': thumbnail,
+    'images': images,
+    'reviews': reviews.map((review) => review.toJson()).toList(),
+    'meta': {'qrCode': qrCode},
+    'warrantyInformation': warrantyInformation,
+    'shippingInformation': shippingInformation,
+    'returnPolicy': returnPolicy,
+  };
 }
 
 class ProductReview {
@@ -104,16 +103,16 @@ class ProductReview {
   final DateTime? date;
 
   factory ProductReview.fromJson(Map<String, dynamic> json) => ProductReview(
-        rating: (json['rating'] as num?)?.toInt() ?? 0,
-        comment: json['comment'] as String? ?? 'No comment provided.',
-        reviewerName: json['reviewerName'] as String? ?? 'Verified customer',
-        date: DateTime.tryParse(json['date'] as String? ?? ''),
-      );
+    rating: (json['rating'] as num?)?.toInt() ?? 0,
+    comment: json['comment'] as String? ?? 'No comment provided.',
+    reviewerName: json['reviewerName'] as String? ?? 'Verified customer',
+    date: DateTime.tryParse(json['date'] as String? ?? ''),
+  );
 
   Map<String, dynamic> toJson() => {
-        'rating': rating,
-        'comment': comment,
-        'reviewerName': reviewerName,
-        'date': date?.toIso8601String(),
-      };
+    'rating': rating,
+    'comment': comment,
+    'reviewerName': reviewerName,
+    'date': date?.toIso8601String(),
+  };
 }

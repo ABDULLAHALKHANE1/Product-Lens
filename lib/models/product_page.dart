@@ -27,9 +27,9 @@ class ProductPage {
   }
 
   Map<String, dynamic> toJson() => {
-        'products': products.map((product) => product.toJson()).toList(),
-        'total': total,
-        'skip': skip,
-        'limit': limit,
-      };
+    'products': products.map((product) => product.toJson()).toList(),
+    'total': total,
+    'skip': skip,
+    'limit': limit,
+  };
 }

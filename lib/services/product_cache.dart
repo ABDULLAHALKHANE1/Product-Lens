@@ -21,8 +21,11 @@ abstract interface class ProductCache {
   });
 
   Future<void> saveProduct(Product product);
+
   Future<Product?> readProduct(int id);
+
   Future<void> saveCategories(List<String> categories);
+
   Future<List<String>?> readCategories();
 }
 
@@ -59,9 +62,7 @@ class PersistentProductCache implements ProductCache {
     );
     if (value == null) return null;
     try {
-      return ProductPage.fromJson(
-        jsonDecode(value) as Map<String, dynamic>,
-      );
+      return ProductPage.fromJson(jsonDecode(value) as Map<String, dynamic>);
     } catch (_) {
       return null;
     }
@@ -69,9 +70,9 @@ class PersistentProductCache implements ProductCache {
 
   @override
   Future<void> saveProduct(Product product) => _store.setString(
-        'cache.product.${product.id}',
-        jsonEncode(product.toJson()),
-      );
+    'cache.product.${product.id}',
+    jsonEncode(product.toJson()),
+  );
 
   @override
   Future<Product?> readProduct(int id) async {

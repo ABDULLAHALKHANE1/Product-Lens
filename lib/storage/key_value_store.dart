@@ -2,8 +2,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 abstract interface class KeyValueStore {
   Future<String?> getString(String key);
+
   Future<void> setString(String key, String value);
+
   Future<bool?> getBool(String key);
+
   Future<void> setBool(String key, bool value);
 }
 

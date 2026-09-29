@@ -61,9 +61,9 @@ class AppDependencies {
   final GoRouter router;
 
   ProductProvider createProductProvider() => ProductProvider(
-        productRepository,
-        pageSize: productConfiguration.pageSize,
-      )..initialise();
+    productRepository,
+    pageSize: productConfiguration.pageSize,
+  )..initialise();
 
   ThemeProvider createThemeProvider() => ThemeProvider(themePreferences);
 

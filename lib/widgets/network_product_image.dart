@@ -20,8 +20,8 @@ class NetworkProductImage extends StatelessWidget {
         : CachedNetworkImage(
             imageUrl: url,
             fit: fit,
-            errorWidget: (_, __, ___) => const _ImageFallback(),
-            progressIndicatorBuilder: (_, __, progress) => Center(
+            errorWidget: (context, url, error) => const _ImageFallback(),
+            progressIndicatorBuilder: (context, url, progress) => Center(
               child: CircularProgressIndicator.adaptive(
                 value: progress.progress,
               ),
@@ -38,7 +38,7 @@ class _ImageFallback extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ColoredBox(
-        color: Theme.of(context).colorScheme.surfaceContainerHighest,
-        child: const Center(child: Icon(Icons.image_not_supported_outlined)),
-      );
+    color: Theme.of(context).colorScheme.surfaceContainerHighest,
+    child: const Center(child: Icon(Icons.image_not_supported_outlined)),
+  );
 }

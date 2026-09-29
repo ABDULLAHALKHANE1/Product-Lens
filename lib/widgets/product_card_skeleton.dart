@@ -36,11 +36,11 @@ class ProductCardSkeleton extends StatelessWidget {
   }
 
   Widget _bar(Color color, double width) => Container(
-        height: 10,
-        width: width,
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(999),
-        ),
-      );
+    height: 10,
+    width: width,
+    decoration: BoxDecoration(
+      color: color,
+      borderRadius: BorderRadius.circular(999),
+    ),
+  );
 }

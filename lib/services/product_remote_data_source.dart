@@ -10,6 +10,8 @@ abstract interface class ProductRemoteDataSource {
   });
 
   Future<Product> getProduct(int id);
+
   Future<List<String>> getCategories();
+
   void dispose();
 }
