@@ -49,8 +49,6 @@ class ProductProvider extends ChangeNotifier {
     _isLoadingMore = true;
     _error = null;
     _notifyListeners();
-    print(_requestVersion);
-    print(requestVersion);
     try {
       final result = await _repository.getProducts(
         skip: _products.length,
