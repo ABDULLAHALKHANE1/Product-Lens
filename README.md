@@ -12,7 +12,7 @@ You can browse a list of products, search and filter them, and open any product 
 
 ## What it does
 
-**Product list**![product-list-dark.png](../../Desktop/product-list-dark.png)
+**Product list**!
 - Shows the thumbnail, title, description, brand, price and rating for each product
 - Shows "In Stock" or "Out of Stock" based on the `stock` value (in stock if stock > 0)
 - Loads more products as you scroll (pagination with `limit` and `skip`)
