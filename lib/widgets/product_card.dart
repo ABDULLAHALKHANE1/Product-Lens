@@ -112,22 +112,22 @@ class _AvailabilityPill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        decoration: BoxDecoration(
-          color: inStock
-              ? const Color(0xFFDCFCE7)
-              : Theme.of(context).colorScheme.errorContainer,
-          borderRadius: BorderRadius.circular(999),
-        ),
-        child: Text(
-          inStock ? 'In Stock' : 'Out of Stock',
-          style: TextStyle(
-            color: inStock
-                ? const Color(0xFF166534)
-                : Theme.of(context).colorScheme.onErrorContainer,
-            fontWeight: FontWeight.w700,
-            fontSize: 10,
-          ),
-        ),
-      );
+    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+    decoration: BoxDecoration(
+      color: inStock
+          ? const Color(0xFFDCFCE7)
+          : Theme.of(context).colorScheme.errorContainer,
+      borderRadius: BorderRadius.circular(999),
+    ),
+    child: Text(
+      inStock ? 'In Stock' : 'Out of Stock',
+      style: TextStyle(
+        color: inStock
+            ? const Color(0xFF166534)
+            : Theme.of(context).colorScheme.onErrorContainer,
+        fontWeight: FontWeight.w700,
+        fontSize: 10,
+      ),
+    ),
+  );
 }

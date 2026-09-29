@@ -15,9 +15,15 @@ class ProductInformationGrid extends StatelessWidget {
       (
         icon: product.isInStock ? Icons.inventory_2_outlined : Icons.block,
         label: 'Availability',
-        value: product.isInStock ? 'In Stock (${product.stock})' : 'Out of Stock',
+        value: product.isInStock
+            ? 'In Stock (${product.stock})'
+            : 'Out of Stock',
       ),
-      (icon: Icons.category_outlined, label: 'Category', value: product.category),
+      (
+        icon: Icons.category_outlined,
+        label: 'Category',
+        value: product.category,
+      ),
       if (product.shippingInformation != null)
         (
           icon: Icons.local_shipping_outlined,
@@ -70,29 +76,29 @@ class _InfoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Card(
-        child: Padding(
-          padding: const EdgeInsets.all(14),
-          child: Row(
-            children: [
-              Icon(icon, color: Theme.of(context).colorScheme.primary),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(label, style: Theme.of(context).textTheme.labelSmall),
-                    const SizedBox(height: 2),
-                    Text(
-                      value,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontWeight: FontWeight.w700),
-                    ),
-                  ],
+    child: Padding(
+      padding: const EdgeInsets.all(14),
+      child: Row(
+        children: [
+          Icon(icon, color: Theme.of(context).colorScheme.primary),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(label, style: Theme.of(context).textTheme.labelSmall),
+                const SizedBox(height: 2),
+                Text(
+                  value,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontWeight: FontWeight.w700),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      );
+        ],
+      ),
+    ),
+  );
 }

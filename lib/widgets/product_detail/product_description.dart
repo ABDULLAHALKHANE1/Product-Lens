@@ -10,19 +10,19 @@ class ProductDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'About this product',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w900,
-                ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            product.description,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(height: 1.55),
-          ),
-        ],
-      );
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        'About this product',
+        style: Theme.of(
+          context,
+        ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900),
+      ),
+      const SizedBox(height: 8),
+      Text(
+        product.description,
+        style: Theme.of(context).textTheme.bodyLarge?.copyWith(height: 1.55),
+      ),
+    ],
+  );
 }

@@ -14,8 +14,8 @@ class ProductService implements ProductRemoteDataSource {
   const ProductService({
     required http.Client client,
     required ProductConfiguration configuration,
-  })  : _client = client,
-        _configuration = configuration;
+  }) : _client = client,
+       _configuration = configuration;
 
   final http.Client _client;
   final ProductConfiguration _configuration;
@@ -30,32 +30,31 @@ class ProductService implements ProductRemoteDataSource {
     final path = query.trim().isNotEmpty
         ? '/products/search'
         : category != null
-            ? '/products/category/${Uri.encodeComponent(category)}'
-            : '/products';
+        ? '/products/category/${Uri.encodeComponent(category)}'
+        : '/products';
     final parameters = <String, String>{
       'limit': '$limit',
       'skip': '$skip',
       if (query.trim().isNotEmpty) 'q': query.trim(),
     };
-    final uri = Uri.parse('${_configuration.apiBaseUrl}$path')
-        .replace(queryParameters: parameters);
+    final uri = Uri.parse(
+      '${_configuration.apiBaseUrl}$path',
+    ).replace(queryParameters: parameters);
 
-    return _parse(
-      () async => ProductPage.fromJson(await _getJson(uri)),
-    );
+    return _parse(() async => ProductPage.fromJson(await _getJson(uri)));
   }
 
   @override
   Future<Product> getProduct(int id) async {
     final uri = Uri.parse('${_configuration.apiBaseUrl}/products/$id');
-    return _parse(
-      () async => Product.fromJson(await _getJson(uri)),
-    );
+    return _parse(() async => Product.fromJson(await _getJson(uri)));
   }
 
   @override
   Future<List<String>> getCategories() async {
-    final uri = Uri.parse('${_configuration.apiBaseUrl}/products/category-list');
+    final uri = Uri.parse(
+      '${_configuration.apiBaseUrl}/products/category-list',
+    );
     final response = await _get(uri);
     final decoded = _decode(response.body);
     if (decoded is! List<dynamic>) {

@@ -149,8 +149,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
                         final columns = constraints.maxWidth >= 900
                             ? 4
                             : constraints.maxWidth >= 600
-                                ? 3
-                                : 2;
+                            ? 3
+                            : 2;
                         return CustomScrollView(
                           controller: _scrollController,
                           physics: const AlwaysScrollableScrollPhysics(),
@@ -161,11 +161,11 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                 itemCount: provider.products.length,
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: columns,
-                                  crossAxisSpacing: 12,
-                                  mainAxisSpacing: 12,
-                                  childAspectRatio: .60,
-                                ),
+                                      crossAxisCount: columns,
+                                      crossAxisSpacing: 12,
+                                      mainAxisSpacing: 12,
+                                      childAspectRatio: .60,
+                                    ),
                                 itemBuilder: (context, index) {
                                   final product = provider.products[index];
                                   return ProductCard(
@@ -219,40 +219,37 @@ class _CacheStatusBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Selector<ProductProvider, bool>(
-        selector: (_, provider) => provider.isUsingCachedData,
-        builder: (context, isUsingCache, _) => AnimatedSize(
-          duration: const Duration(milliseconds: 200),
-          child: isUsingCache
-              ? Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 14,
-                    vertical: 10,
+    selector: (_, provider) => provider.isUsingCachedData,
+    builder: (context, isUsingCache, _) => AnimatedSize(
+      duration: const Duration(milliseconds: 200),
+      child: isUsingCache
+          ? Container(
+              width: double.infinity,
+              margin: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.secondaryContainer,
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.cloud_off_rounded, size: 20),
+                  const SizedBox(width: 10),
+                  const Expanded(
+                    child: Text('Offline mode · showing saved products'),
                   ),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondaryContainer,
-                    borderRadius: BorderRadius.circular(14),
+                  TextButton(
+                    onPressed: () => context
+                        .read<ProductProvider>()
+                        .loadProducts(refresh: true),
+                    child: const Text('Retry'),
                   ),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.cloud_off_rounded, size: 20),
-                      const SizedBox(width: 10),
-                      const Expanded(
-                        child: Text('Offline mode · showing saved products'),
-                      ),
-                      TextButton(
-                        onPressed: () => context
-                            .read<ProductProvider>()
-                            .loadProducts(refresh: true),
-                        child: const Text('Retry'),
-                      ),
-                    ],
-                  ),
-                )
-              : const SizedBox.shrink(),
-        ),
-      );
+                ],
+              ),
+            )
+          : const SizedBox.shrink(),
+    ),
+  );
 }
 
 class _CategoryFilter extends StatelessWidget {
@@ -261,41 +258,41 @@ class _CategoryFilter extends StatelessWidget {
   final ValueChanged<String?> onSelected;
 
   @override
-  Widget build(BuildContext context) => Selector<
-          ProductProvider,
-          ({List<String> categories, String? selected})>(
-        selector: (_, provider) => (
-          categories: provider.categories,
-          selected: provider.selectedCategory,
+  Widget build(
+    BuildContext context,
+  ) => Selector<ProductProvider, ({List<String> categories, String? selected})>(
+    selector: (_, provider) =>
+        (categories: provider.categories, selected: provider.selectedCategory),
+    builder: (context, data, _) {
+      if (data.categories.isEmpty) return const SizedBox.shrink();
+      return SizedBox(
+        height: 42,
+        child: ListView.separated(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          scrollDirection: Axis.horizontal,
+          itemCount: data.categories.length + 1,
+          separatorBuilder: (context, index) => const SizedBox(width: 8),
+          itemBuilder: (context, index) {
+            final category = index == 0 ? null : data.categories[index - 1];
+            final selected = data.selected == category;
+            return ChoiceChip(
+              selected: selected,
+              label: Text(category == null ? 'All' : _friendlyName(category)),
+              onSelected: (_) => onSelected(category),
+            );
+          },
         ),
-        builder: (context, data, _) {
-          if (data.categories.isEmpty) return const SizedBox.shrink();
-          return SizedBox(
-            height: 42,
-            child: ListView.separated(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              scrollDirection: Axis.horizontal,
-              itemCount: data.categories.length + 1,
-              separatorBuilder: (_, __) => const SizedBox(width: 8),
-              itemBuilder: (context, index) {
-                final category = index == 0 ? null : data.categories[index - 1];
-                final selected = data.selected == category;
-                return ChoiceChip(
-                  selected: selected,
-                  label: Text(category == null ? 'All' : _friendlyName(category)),
-                  onSelected: (_) => onSelected(category),
-                );
-              },
-            ),
-          );
-        },
       );
+    },
+  );
 
   String _friendlyName(String value) => value
       .split('-')
-      .map((word) => word.isEmpty
-          ? word
-          : '${word[0].toUpperCase()}${word.substring(1)}')
+      .map(
+        (word) => word.isEmpty
+            ? word
+            : '${word[0].toUpperCase()}${word.substring(1)}',
+      )
       .join(' ');
 }
 
@@ -304,16 +301,16 @@ class _LoadingGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GridView.builder(
-        padding: const EdgeInsets.fromLTRB(16, 4, 16, 20),
-        itemCount: 6,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 12,
-          mainAxisSpacing: 12,
-          childAspectRatio: .60,
-        ),
-        itemBuilder: (_, __) => const ProductCardSkeleton(),
-      );
+    padding: const EdgeInsets.fromLTRB(16, 4, 16, 20),
+    itemCount: 6,
+    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 2,
+      crossAxisSpacing: 12,
+      mainAxisSpacing: 12,
+      childAspectRatio: .60,
+    ),
+    itemBuilder: (context, index) => const ProductCardSkeleton(),
+  );
 }
 
 class _EmptyState extends StatelessWidget {
@@ -350,17 +347,13 @@ class _EmptyState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              icon,
-              size: 58,
-              color: Theme.of(context).colorScheme.primary,
-            ),
+            Icon(icon, size: 58, color: Theme.of(context).colorScheme.primary),
             const SizedBox(height: 16),
             Text(
               title,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w800,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
             ),
             const SizedBox(height: 8),
             Text(
@@ -388,19 +381,19 @@ class _PaginationError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Flexible(
-              child: Text(
-                message ?? 'Could not load more products.',
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            TextButton(onPressed: onRetry, child: const Text('Retry')),
-          ],
+    padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Flexible(
+          child: Text(
+            message ?? 'Could not load more products.',
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
-      );
+        TextButton(onPressed: onRetry, child: const Text('Retry')),
+      ],
+    ),
+  );
 }

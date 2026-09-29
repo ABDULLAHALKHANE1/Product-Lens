@@ -2,6 +2,7 @@ import '../storage/key_value_store.dart';
 
 abstract interface class ThemePreferences {
   Future<bool?> readDarkMode();
+
   Future<void> saveDarkMode(bool isDark);
 }
 

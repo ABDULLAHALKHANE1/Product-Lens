@@ -30,8 +30,9 @@ class AppRouter {
               }
               return ProductDetailScreen(
                 productId: productId,
-                initialProduct:
-                    state.extra is Product ? state.extra as Product : null,
+                initialProduct: state.extra is Product
+                    ? state.extra as Product
+                    : null,
                 providerFactory: detailProviderFactory,
               );
             },
@@ -47,9 +48,8 @@ class _InvalidProductRoute extends StatelessWidget {
   const _InvalidProductRoute();
 
   @override
-  Widget build(BuildContext context) => const _RouteErrorScreen(
-        message: 'That product link is invalid.',
-      );
+  Widget build(BuildContext context) =>
+      const _RouteErrorScreen(message: 'That product link is invalid.');
 }
 
 class _RouteErrorScreen extends StatelessWidget {
@@ -59,39 +59,39 @@ class _RouteErrorScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: const Text('Page not found')),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(32),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  Icons.route_outlined,
-                  size: 60,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'We couldn’t open this page',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w800,
-                      ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  message?.toString() ?? 'The requested page does not exist.',
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 20),
-                FilledButton.icon(
-                  onPressed: () => context.goNamed(AppRoutes.products),
-                  icon: const Icon(Icons.storefront_outlined),
-                  label: const Text('Browse products'),
-                ),
-              ],
+    appBar: AppBar(title: const Text('Page not found')),
+    body: Center(
+      child: Padding(
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.route_outlined,
+              size: 60,
+              color: Theme.of(context).colorScheme.primary,
             ),
-          ),
+            const SizedBox(height: 16),
+            Text(
+              'We couldn’t open this page',
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              message?.toString() ?? 'The requested page does not exist.',
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 20),
+            FilledButton.icon(
+              onPressed: () => context.goNamed(AppRoutes.products),
+              icon: const Icon(Icons.storefront_outlined),
+              label: const Text('Browse products'),
+            ),
+          ],
         ),
-      );
+      ),
+    ),
+  );
 }

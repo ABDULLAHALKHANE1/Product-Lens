@@ -25,12 +25,12 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
-        create: (_) => providerFactory.create()..load(productId),
-        child: _ProductDetailView(
-          productId: productId,
-          fallbackProduct: initialProduct,
-        ),
-      );
+    create: (_) => providerFactory.create()..load(productId),
+    child: _ProductDetailView(
+      productId: productId,
+      fallbackProduct: initialProduct,
+    ),
+  );
 }
 
 class _ProductDetailView extends StatelessWidget {
@@ -48,10 +48,7 @@ class _ProductDetailView extends StatelessWidget {
     final product = provider.product ?? fallbackProduct;
 
     if (product == null) {
-      return _ProductDetailEmptyState(
-        provider: provider,
-        productId: productId,
-      );
+      return _ProductDetailEmptyState(provider: provider, productId: productId);
     }
 
     return Scaffold(
@@ -104,36 +101,36 @@ class _ProductDetailEmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: const Text('Product details')),
-        body: Center(
-          child: provider.isLoading
-              ? const CircularProgressIndicator.adaptive()
-              : Padding(
-                  padding: const EdgeInsets.all(32),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.inventory_2_outlined,
-                        size: 60,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        provider.errorMessage ?? 'Product details are unavailable.',
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 20),
-                      FilledButton.icon(
-                        onPressed: () => provider.load(productId),
-                        icon: const Icon(Icons.refresh_rounded),
-                        label: const Text('Try again'),
-                      ),
-                    ],
+    appBar: AppBar(title: const Text('Product details')),
+    body: Center(
+      child: provider.isLoading
+          ? const CircularProgressIndicator.adaptive()
+          : Padding(
+              padding: const EdgeInsets.all(32),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.inventory_2_outlined,
+                    size: 60,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
-                ),
-        ),
-      );
+                  const SizedBox(height: 16),
+                  Text(
+                    provider.errorMessage ?? 'Product details are unavailable.',
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 20),
+                  FilledButton.icon(
+                    onPressed: () => provider.load(productId),
+                    icon: const Icon(Icons.refresh_rounded),
+                    label: const Text('Try again'),
+                  ),
+                ],
+              ),
+            ),
+    ),
+  );
 }
 
 class _OfflineBanner extends StatelessWidget {
@@ -141,16 +138,16 @@ class _OfflineBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        color: Theme.of(context).colorScheme.secondaryContainer,
-        child: const Row(
-          children: [
-            Icon(Icons.cloud_off_rounded, size: 20),
-            SizedBox(width: 10),
-            Expanded(child: Text('Offline mode · showing saved details')),
-          ],
-        ),
-      );
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+    color: Theme.of(context).colorScheme.secondaryContainer,
+    child: const Row(
+      children: [
+        Icon(Icons.cloud_off_rounded, size: 20),
+        SizedBox(width: 10),
+        Expanded(child: Text('Offline mode · showing saved details')),
+      ],
+    ),
+  );
 }
 
 class _RetryBanner extends StatelessWidget {
@@ -161,9 +158,7 @@ class _RetryBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialBanner(
-        content: Text('Showing saved product information. $message'),
-        actions: [
-          TextButton(onPressed: onRetry, child: const Text('Retry')),
-        ],
-      );
+    content: Text('Showing saved product information. $message'),
+    actions: [TextButton(onPressed: onRetry, child: const Text('Retry'))],
+  );
 }

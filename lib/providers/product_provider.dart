@@ -6,7 +6,7 @@ import '../services/api_exception.dart';
 
 class ProductProvider extends ChangeNotifier {
   ProductProvider(this._repository, {required int pageSize})
-      : _pageSize = pageSize;
+    : _pageSize = pageSize;
 
   final ProductRepository _repository;
   final int _pageSize;
@@ -23,14 +23,23 @@ class ProductProvider extends ChangeNotifier {
   bool _isDisposed = false;
 
   List<Product> get products => List.unmodifiable(_products);
+
   List<String> get categories => List.unmodifiable(_categories);
+
   bool get isLoading => _isLoading;
+
   bool get isLoadingMore => _isLoadingMore;
+
   ApiException? get error => _error;
+
   String? get errorMessage => _error?.message;
+
   bool get isUsingCachedData => _isUsingCachedData;
+
   String get query => _query;
+
   String? get selectedCategory => _selectedCategory;
+
   bool get canLoadMore => _products.length < _total;
 
   Future<void> initialise() async {

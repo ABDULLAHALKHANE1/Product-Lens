@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:product_lens/models/product.dart';
 import 'package:product_lens/models/product_page.dart';
-import 'package:product_lens/repositories/product_repository.dart';
 import 'package:product_lens/services/api_exception.dart';
 import 'package:product_lens/services/cached_product_repository.dart';
 import 'package:product_lens/services/product_cache.dart';

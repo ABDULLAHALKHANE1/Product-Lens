@@ -9,11 +9,12 @@ class CachedProductRepository implements ProductRepository {
   CachedProductRepository({
     required ProductRemoteDataSource remote,
     required ProductCache cache,
-  })  : _remote = remote,
-        _cache = cache;
+  }) : _remote = remote,
+       _cache = cache;
 
   final ProductRemoteDataSource _remote;
   final ProductCache _cache;
+
   @override
   Future<DataResult<ProductPage>> getProducts({
     required int skip,
@@ -53,7 +54,7 @@ class CachedProductRepository implements ProductRepository {
       } catch (_) {
         throw error;
       }
-      if (cachedPage == null) throw error;
+      if (cachedPage == null) rethrow;
       return DataResult.cached(cachedPage);
     }
   }
@@ -76,7 +77,7 @@ class CachedProductRepository implements ProductRepository {
       } catch (_) {
         throw error;
       }
-      if (cachedProduct == null) throw error;
+      if (cachedProduct == null) rethrow;
       return DataResult.cached(cachedProduct);
     }
   }
@@ -99,7 +100,7 @@ class CachedProductRepository implements ProductRepository {
       } catch (_) {
         throw error;
       }
-      if (cachedCategories == null) throw error;
+      if (cachedCategories == null) rethrow;
       return DataResult.cached(cachedCategories);
     }
   }
